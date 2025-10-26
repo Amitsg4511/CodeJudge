@@ -1,11 +1,12 @@
 import express from "express";
-import { loadEnvFile } from "node:process";
 import apiRouter from "./routes/index.js";
+import errorHandler from "./utils/errorHandler.js";
+import { PORT } from "./config/server.config.js";
+import connectDB from "./config/db.config.js";
+import mongoose from "mongoose";
+
 const app = express();
-
-loadEnvFile(".env");
-const PORT = process.env.PORT;
-
+app.use(errorHandler);
 app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
@@ -14,4 +15,9 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`listening at ${PORT}`);
+  // throw new BaseError("Listing", 404, "bad request");
+  connectDB();
+  const Cat = mongoose.model("Cat", { name: String });
+  const kitty = new Cat({ name: "Zildjian" });
+  kitty.save().then(() => console.log("meow"));
 });

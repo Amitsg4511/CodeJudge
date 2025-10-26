@@ -1,29 +1,34 @@
+import { StatusCodes } from "http-status-codes";
+import NotImplementedError from "../errors/notimplemented.error.js";
+
 function addProblem(req, res) {
-  res.status.json({
-    message: "Not implemented",
-  });
+  try {
+    throw new NotImplementedError("addProblem");
+  } catch (error) {
+    next(error);
+  }
 }
 
 function getProblem(req, res) {
-  res.status.json({
+  res.status(StatusCodes.NOT_IMPLEMENTED).json({
     message: "Not implemented",
   });
 }
 
 function getProblems(req, res) {
-  res.status.json({
+  res.status(StatusCodes.NOT_IMPLEMENTED).json({
     message: "Not implemented",
   });
 }
 
 function deleteProblem(req, res) {
-  res.status.json({
+  res.status(StatusCodes.NOT_IMPLEMENTED).json({
     message: "Not implemented",
   });
 }
 
 function updateProblem(req, res) {
-  res.status.json({
+  res.status(StatusCodes.NOT_IMPLEMENTED).json({
     message: "Not implemented",
   });
 }
